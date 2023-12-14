@@ -4,7 +4,7 @@ from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import QSize, QTimer, QThread
 import requests
 from io import BytesIO
-import shutil
+import shutil,os
 from lists import champs, roless
 from random import*
 import threading
@@ -68,7 +68,7 @@ def roles(r):
     
     r = r.split()
     for i, role in enumerate(r[:4]):
-        pixmap.load(f"{role}.png")
+        pixmap.load(f"roles/{role}.png")
         role_widget = getattr(windows, f"role{i + 1}")
         role_widget.setPixmap(pixmap)
 
@@ -136,8 +136,11 @@ filling.start()
 
 
 windows.generate.clicked.connect(show)
-sleep(0.10)
 windows.setWindowTitle("League of Legends Champs Generator")
+if not os.path.exists('images'):
+    # Create the folder
+    os.makedirs('images')
+sleep(0.10)
 windows.show()
 app.exec_()
 
