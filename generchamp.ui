@@ -27,9 +27,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 20pt &quot;Snap ITC&quot;;
-color: rgb(255, 255, 255);
-</string>
+     <string notr="true">font: 16pt &quot;Snap ITC&quot;;
+color: rgb(255, 0, 0);</string>
     </property>
     <property name="text">
      <string>PLAY</string>

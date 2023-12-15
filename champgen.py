@@ -11,7 +11,7 @@ import threading
 from pathlib import Path
 from time import sleep
 
-a = 20
+a = 75
 pix = []
 
 
@@ -78,9 +78,12 @@ def show():
         global a
         windows.generate.setEnabled(False)
         windows.roles.setEnabled(False)
-        if a == 20:
-            timer.start(a)
 
+        if a == 75:
+            windows.generate.setText("PLAYING...")
+            windows.generate.setStyleSheet("color: white; background-color: green; font-size: 20px; font-weight: bold;")
+            timer.start(a)
+            
         n = generate_click()
         pixmap = pix[n]
         windows.img.setPixmap(pixmap)
@@ -88,13 +91,17 @@ def show():
         roles(roless[n])
 
         a = a + 1
-        if a >= 100:
+        if a >= 200:
             timer.stop()
-            a = 20
+            windows.generate.setText("PLAY")
+            windows.generate.setStyleSheet("color: white; background-color: red; font-size: 20px; font-weight: bold;")
+            a = 75
             windows.generate.setEnabled(True)
             windows.roles.setEnabled(True)
-    except:
-        pass
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
 
 def generate_click():
     try:
@@ -122,12 +129,12 @@ pixmap.loadFromData(image_data.getvalue())
 windows.img.setPixmap(pixmap)
 icon_size = QSize(35, 35)
 windows.roles.setIconSize(icon_size)
-windows.roles.addItem(QIcon(QPixmap('Random.png')), 'Random')
-windows.roles.addItem(QIcon(QPixmap('Top.png')), 'Top')
-windows.roles.addItem(QIcon(QPixmap('Jungle.png')), 'Jungle')
-windows.roles.addItem(QIcon(QPixmap('Mid.png')), 'Mid')
-windows.roles.addItem(QIcon(QPixmap('ADC.png')), 'ADC')
-windows.roles.addItem(QIcon(QPixmap('Support.png')), 'Support')
+windows.roles.addItem(QIcon(QPixmap('roles/Random.png')), 'Random')
+windows.roles.addItem(QIcon(QPixmap('roles/Top.png')), 'Top')
+windows.roles.addItem(QIcon(QPixmap('roles/Jungle.png')), 'Jungle')
+windows.roles.addItem(QIcon(QPixmap('roles/Mid.png')), 'Mid')
+windows.roles.addItem(QIcon(QPixmap('roles/ADC.png')), 'ADC')
+windows.roles.addItem(QIcon(QPixmap('roles/Support.png')), 'Support')
 timer = QTimer()
 timer.timeout.connect(show)
 
